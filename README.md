@@ -128,5 +128,8 @@ Stay tuned!
 
 ---
 
+For questions, help and requests, use our [Discord community](https://discord.gg/ByKfn3H7gX), or email us at `team@nowa.dev`
+
+
 
 ## 🙌 Made with ❤️ by Nowa team
