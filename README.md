@@ -6,11 +6,14 @@ This is a simple sample project that demonstrates a basic chat interface powered
 
 ## ✨ Features
 
-- Chat with ChatGPT using OpenAI’s API
+- Chat with ChatGPT using OpenAI’s API with your own custom prompt 
 - Easily modify the prompt and model
 - Beautiful chat UI with a robotic atmosphere
+- Handle exceptions thrown by the API request (if any) with a Snackbar
+- Showing loading indicator while waiting for the response
+- Chat messages are displayed in markdown format (using a `Markdown` widget inside the Chat bubble)  
 - Ready for extension with support for voice, image, and file messages (tutorials will come soon on Nowa Youtube channel)
-
+- Can be instantly tested with Nowa play mode, or using simulators/real-device (After pasting your own OpenAI API key, check below for more)
 ---
 
 ## 🛠️ Getting Started
