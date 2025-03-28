@@ -18,24 +18,6 @@ This is a simple sample project that demonstrates a basic chat interface powered
 
 ## 🛠️ Getting Started
 
-### ▶️ Run the App
-
-> Before running the app, be sure to follow the setup steps mentioned below
-
-You can test the app in **two ways**:
-
-1. **Using Nowa Previewer**
-    
-    - Click the **Play** button in Nowa's toolbox to instantly preview the app.
-        
-2. **Using a simulator or real device (for local projects)**
-    - Clone it as a local project to be able to use your own simulators or real-device
-        
-    - Before running it locally, make sure to follow the setup steps below.
-        
-
----
-
 ## 🔐 Important Setup Before Running
 
 ### 1. **Add Your OpenAI API Key**
@@ -77,6 +59,23 @@ To remove them:
 This will start the chat empty, as in a real-world app.
 
 ---
+
+### ▶️ Run the App
+
+You can test the app in **two ways**:
+
+1. **Using Nowa Previewer**
+    
+    - Click the **Play** button in Nowa's toolbox to instantly preview the app.
+        
+2. **Using a simulator or real device (for local projects)**
+    - Clone it as a local project to be able to use your own simulators or real-device
+        
+    - Before running it locally, make sure to follow the setup steps below.
+        
+
+---
+
 
 ## 🧠 Customizing the Prompt
 
