@@ -1,0 +1,85 @@
+{
+    "paths": {
+        "/": {
+            "get": {
+                "collection": "OpenAI",
+                "operationId": "getChatMessages",
+                "summary": "Nowa Auto Generated",
+                "description": "",
+                "responses": {
+                    "200": {
+                        "description": "Success",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "type": "object"
+                                },
+                                "value": null
+                            }
+                        }
+                    }
+                }
+            }
+        },
+        "v1/chat/completions ": {
+            "get": {
+                "collection": "OpenAI",
+                "operationId": "getChatMessages",
+                "summary": "Nowa Auto Generated",
+                "description": "",
+                "responses": {
+                    "200": {
+                        "description": "Success",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "type": "object"
+                                },
+                                "value": null
+                            }
+                        }
+                    }
+                }
+            }
+        },
+        "v1/chat/completions": {
+            "post": {
+                "collection": "OpenAI",
+                "operationId": "getChatMessages",
+                "summary": "Nowa Auto Generated",
+                "description": "",
+                "responses": {
+                    "200": {
+                        "description": "Success",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "type": "object"
+                                },
+                                "value": {
+                                    "choices": [
+                                        {
+                                            "message": {
+                                                "content": "[content]"
+                                            }
+                                        },
+                                        {
+                                            "message": {
+                                                "content": "[content]"
+                                            }
+                                        },
+                                        {
+                                            "message": {
+                                                "content": "[content]"
+                                            }
+                                        }
+                                    ]
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        }
+    }
+}

@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:chatbot/chat_template/message_model.dart';
 import 'package:nowa_runtime/nowa_runtime.dart';
+import 'package:chatbot/models/get_chat_messages_model.dart';
+import 'package:chatbot/api/api_collection.api.dart';
 import 'package:chatbot/chat_template/chat_bubble.dart';
 
 @NowaGenerated({'auto-width': 393, 'auto-height': 808})
@@ -25,7 +27,21 @@ class _ChatPageState extends State<ChatPage> {
     const MessageModel(msg: 'Good What about You ', time: '10:07')
   ];
 
-  TextEditingController text = TextEditingController();
+  TextEditingController textFieldController = TextEditingController();
+
+  bool? isAwaitingReplay = false;
+
+  void handleAIResponse(
+      {GetChatMessagesModel? response = const GetChatMessagesModel()}) {
+    final var1 = MessageModel(
+      msg: response?.choices?.first?.message?.content,
+      time: DateTime.now().format('jm'),
+      isMe: false,
+    );
+    fullChat?.add(var1);
+    isAwaitingReplay = false;
+    setState(() {});
+  }
 
   @override
   void initState() {
@@ -131,7 +147,6 @@ class _ChatPageState extends State<ChatPage> {
               ),
               FlexSizedBox(
                 width: double.infinity,
-                height: 72.0,
                 child: Container(
                   decoration: BoxDecoration(
                       color: const Color(0x00160b1c),
@@ -153,7 +168,7 @@ class _ChatPageState extends State<ChatPage> {
                           width: null,
                           flex: 1,
                           child: TextFormField(
-                            controller: text,
+                            controller: textFieldController,
                             decoration: InputDecoration(
                               labelText: null,
                               hintText: 'type something...',
@@ -174,29 +189,46 @@ class _ChatPageState extends State<ChatPage> {
                                 color: Color(0xffffffff),
                                 fontFamily: 'Figtree'),
                             onEditingComplete: () {
-                              send();
+                              sendMessage();
                             },
                             cursorColor: const Color(0xffffb034),
                             showCursor: true,
                           ),
                         ),
                         FlexSizedBox(
-                          width: 46.0,
-                          height: 46.0,
-                          child: IconButton(
-                            onPressed: () {
-                              send();
-                            },
-                            icon: const Icon(
-                              IconData(
-                                58737,
-                                fontFamily: 'MaterialIcons',
-                                matchTextDirection: true,
+                          child: AnimatedCrossFade(
+                            firstChild: SizedBox(
+                              width: 40.0,
+                              height: 40.0,
+                              child: IconButton(
+                                onPressed: () {
+                                  sendMessage();
+                                },
+                                icon: const Icon(
+                                  IconData(
+                                    58737,
+                                    fontFamily: 'MaterialIcons',
+                                    matchTextDirection: true,
+                                  ),
+                                  color: Color(0xffffffff),
+                                  fill: null,
+                                ),
+                                color: null,
                               ),
-                              color: Color(0xffffffff),
-                              fill: null,
                             ),
-                            color: null,
+                            crossFadeState: isAwaitingReplay!
+                                ? CrossFadeState.showSecond
+                                : CrossFadeState.showFirst,
+                            duration: const Duration(milliseconds: 200),
+                            secondChild: const SizedBox(
+                              width: 40.0,
+                              height: 40.0,
+                              child: CircularProgressIndicator(
+                                strokeWidth: 3.0,
+                                strokeAlign: -1.0,
+                              ),
+                            ),
+                            excludeBottomFocus: true,
                           ),
                         )
                       ],
@@ -219,15 +251,34 @@ class _ChatPageState extends State<ChatPage> {
           ),
           backgroundColor: const Color(0x00ffffff),
           foregroundColor: const Color(0xffffffff),
+          centerTitle: true,
         ),
       ),
     );
   }
 
-  void send() {
-    fullChat
-        ?.add(MessageModel(msg: text.text, time: DateTime.now().format('jm')));
-    text.clear();
-    setState(() {});
+  Future<void> sendMessage() async {
+    final userText = textFieldController.text.trim();
+    if (userText.isNotEmpty) {
+      fullChat
+          ?.add(MessageModel(msg: userText, time: DateTime.now().format('jm')));
+      textFieldController.clear();
+      isAwaitingReplay = true;
+      setState(() {});
+      try {
+        final response = await OpenAI().getChatMessages(message: userText);
+        handleAIResponse(response: response);
+      } catch (error) {
+        ScaffoldMessenger.of(context).showSnackBar(SnackBar(
+          content: Text(
+            error.toString(),
+          ),
+        ));
+        isAwaitingReplay = false;
+        setState(() {});
+      }
+    } else {
+      return;
+    }
   }
 }

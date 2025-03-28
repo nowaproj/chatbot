@@ -23,28 +23,28 @@ class ChatBubble extends StatelessWidget {
               ? const Color(0xff2a004e)
               : const Color(0x15ffffff),
           borderRadius: BorderRadius.only(
-            topLeft: const Radius.circular(16),
-            topRight: const Radius.circular(16),
+            topLeft: const Radius.circular(16.0),
+            topRight: const Radius.circular(16.0),
             bottomLeft: Radius.circular(message!.isMe! ? 16 : 0),
             bottomRight: Radius.circular(message!.isMe! ? 0 : 16),
           )),
       child: Padding(
         padding: const EdgeInsets.only(
-          left: 16,
-          right: 16,
-          top: 16,
-          bottom: 16,
+          left: 16.0,
+          right: 16.0,
+          top: 16.0,
+          bottom: 16.0,
         ),
         child: NFlex(
           direction: Axis.vertical,
-          spacing: 0,
+          spacing: 0.0,
           mainAxisSize: MainAxisSize.min,
           mainAxisAlignment: MainAxisAlignment.center,
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
             FlexSizedBox(
               height: null,
-              child: Text(
+              child: Markdown(
                 message?.msg ?? 'Message',
                 style:
                     TextStyle(color: Theme.of(context).colorScheme.onPrimary),
@@ -54,7 +54,7 @@ class ChatBubble extends StatelessWidget {
               width: null,
               height: null,
               child: Align(
-                alignment: const Alignment(1, 0),
+                alignment: const Alignment(1.0, 0.0),
                 child: Text(
                   message?.time ?? '10:00',
                   style: const TextStyle(color: Color(0x80ffffff)),
