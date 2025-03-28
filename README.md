@@ -18,9 +18,9 @@ This is a simple sample project that demonstrates a basic chat interface powered
 
 ## 🛠️ Getting Started
 
-## 🔐 Important Setup Before Running
+### 🔐 Important Setup Before Running
 
-### 1. **Add Your OpenAI API Key**
+#### 1. **Add Your OpenAI API Key**
 
 > Without this, the app will throw an exception when sending messages.
 
@@ -43,7 +43,7 @@ Steps:
 
 ---
 
-### 2. **Remove Default UI Messages (Optional)**
+#### 2. **Remove Default UI Messages (Optional)**
 
 This sample includes two pre-filled messages to showcase the chat layout.
 
