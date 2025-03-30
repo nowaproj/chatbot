@@ -2,8 +2,8 @@ import 'package:flutter/material.dart';
 import 'package:chatbot/chat_template/message_model.dart';
 import 'package:nowa_runtime/nowa_runtime.dart';
 import 'package:chatbot/models/get_chat_messages_model.dart';
-import 'package:chatbot/api/api_collection.api.dart';
 import 'package:chatbot/chat_template/chat_bubble.dart';
+import 'package:chatbot/api/api_collection.api.dart';
 
 @NowaGenerated({'auto-width': 393, 'auto-height': 808})
 class ChatPage extends StatefulWidget {
@@ -21,31 +21,43 @@ class _ChatPageState extends State<ChatPage> {
   List<MessageModel?>? fullChat = [
     const MessageModel(
       msg: 'Hi How are you ? ',
-      isMe: false,
-      time: '10:00',
+      isMe: true,
+      time: '10:00 AM',
     ),
-    const MessageModel(msg: 'Good What about You ', time: '10:07')
+    const MessageModel(
+      msg: 'Good What about You ',
+      time: '10:07 AM',
+      isMe: false,
+    )
   ];
 
   TextEditingController textFieldController = TextEditingController();
 
   bool? isAwaitingReplay = false;
 
-  void handleAIResponse(
-      {GetChatMessagesModel? response = const GetChatMessagesModel()}) {
-    final var1 = MessageModel(
-      msg: response?.choices?.first?.message?.content,
-      time: DateTime.now().format('jm'),
-      isMe: false,
-    );
-    fullChat?.add(var1);
-    isAwaitingReplay = false;
-    setState(() {});
-  }
-
-  @override
-  void initState() {
-    super.initState();
+  Future<void> sendMessage() async {
+    final userText = textFieldController.text.trim();
+    if (userText.isNotEmpty) {
+      fullChat
+          ?.add(MessageModel(msg: userText, time: DateTime.now().format('jm')));
+      textFieldController.clear();
+      isAwaitingReplay = true;
+      setState(() {});
+      try {
+        final response = await OpenAI().getChatMessages(message: userText);
+        handleAIResponse(response: response);
+      } catch (error) {
+        ScaffoldMessenger.of(context).showSnackBar(SnackBar(
+          content: Text(
+            error.toString(),
+          ),
+        ));
+        isAwaitingReplay = false;
+        setState(() {});
+      }
+    } else {
+      return;
+    }
   }
 
   @override
@@ -257,28 +269,20 @@ class _ChatPageState extends State<ChatPage> {
     );
   }
 
-  Future<void> sendMessage() async {
-    final userText = textFieldController.text.trim();
-    if (userText.isNotEmpty) {
-      fullChat
-          ?.add(MessageModel(msg: userText, time: DateTime.now().format('jm')));
-      textFieldController.clear();
-      isAwaitingReplay = true;
-      setState(() {});
-      try {
-        final response = await OpenAI().getChatMessages(message: userText);
-        handleAIResponse(response: response);
-      } catch (error) {
-        ScaffoldMessenger.of(context).showSnackBar(SnackBar(
-          content: Text(
-            error.toString(),
-          ),
-        ));
-        isAwaitingReplay = false;
-        setState(() {});
-      }
-    } else {
-      return;
-    }
+  @override
+  void initState() {
+    super.initState();
+  }
+
+  void handleAIResponse(
+      {GetChatMessagesModel? response = const GetChatMessagesModel()}) {
+    final var1 = MessageModel(
+      msg: response?.choices?.first?.message?.content,
+      time: DateTime.now().format('jm'),
+      isMe: false,
+    );
+    fullChat?.add(var1);
+    isAwaitingReplay = false;
+    setState(() {});
   }
 }
