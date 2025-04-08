@@ -24,6 +24,6 @@ flutter:
     - assets/
     - assets/fonts/
   fonts:
-    - family: Figtree
+    - family:
       fonts:
         - asset: assets/fonts/Figtree.ttf
