@@ -25,6 +25,11 @@
             "y": 205.0,
             "w": 801.228515625,
             "widget": "Column(spacing:49.0,mainAxisSize:MainAxisSize.min,mainAxisAlignment:MainAxisAlignment.center,crossAxisAlignment:CrossAxisAlignment.start,children:[FlexSizedBox(width:null,height:null,child:Text('Warning: Enter your openAI key to test the app',style:Theme.of(context).textTheme.displaySmall,),),FlexSizedBox(width:null,height:null,child:Text('1. Go to Files panel > API folder > api_collection.api.dart\\n2. In the header section, next to \"Authorization\", add your OpenAPI key\\n\\nThe key shpuld look like this: \"Bearer sk-proj-xxxx\"\\n  ',style:Theme.of(context).textTheme.titleLarge,),),FlexSizedBox(width:801.228515625,height:null,child:Column(spacing:49.0,mainAxisSize:MainAxisSize.min,mainAxisAlignment:MainAxisAlignment.center,crossAxisAlignment:CrossAxisAlignment.start,children:[FlexSizedBox(width:null,height:null,child:Text('How to remove the two default messages',style:Theme.of(context).textTheme.displaySmall,),),FlexSizedBox(width:null,height:null,child:Text('1. Select the screen \"ChatPage\"\\n2. Select the variable \"FullChat\"\\n3. In the details panel below, change the \"Default Value\" from 2 to 0\\n  ',style:Theme.of(context).textTheme.titleLarge,),)],),)],)"
+        },
+        {
+            "x": 496.0,
+            "y": 114.0,
+            "widget": "const Text('Test',)"
         }
     ]
 }
